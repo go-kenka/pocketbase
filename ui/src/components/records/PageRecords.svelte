@@ -73,7 +73,7 @@
         updateQueryParams();
     }
 
-    $: $pageTitle = $activeCollection?.name || "Collections";
+    $: $pageTitle = $activeCollection?.name || "集合";
 
     async function showRecordById(recordId) {
         await tick(); // ensure that the reactive component params are resolved
@@ -143,7 +143,7 @@
     <PageWrapper center>
         <div class="placeholder-section m-b-base">
             <span class="loader loader-lg" />
-            <h1>Loading collections...</h1>
+            <h1>正在加载集合...</h1>
         </div>
     </PageWrapper>
 {:else if !$collections.length}
@@ -153,16 +153,16 @@
                 <i class="ri-database-2-line" />
             </div>
             {#if $hideControls}
-                <h1 class="m-b-10">You don't have any collections yet.</h1>
+                <h1 class="m-b-10">您还没有创建任何集合。</h1>
             {:else}
-                <h1 class="m-b-10">Create your first collection to add records!</h1>
+                <h1 class="m-b-10">创建您的第一个集合来添加记录！</h1>
                 <button
                     type="button"
                     class="btn btn-expanded-lg btn-lg"
                     on:click={() => collectionUpsertPanel?.show()}
                 >
                     <i class="ri-add-line" />
-                    <span class="txt">Create new collection</span>
+                    <span class="txt">创建新集合</span>
                 </button>
             {/if}
         </div>
@@ -173,7 +173,7 @@
     <PageWrapper class="flex-content">
         <header class="page-header">
             <nav class="breadcrumbs">
-                <div class="breadcrumb-item">Collections</div>
+                <div class="breadcrumb-item">集合</div>
                 <div class="breadcrumb-item">{$activeCollection.name}</div>
             </nav>
 
@@ -183,7 +183,7 @@
                         type="button"
                         aria-label="Edit collection"
                         class="btn btn-transparent btn-circle"
-                        use:tooltip={{ text: "Edit collection", position: "right" }}
+                        use:tooltip={{ text: "编辑集合", position: "right" }}
                         on:click={() => collectionUpsertPanel?.show($activeCollection)}
                     >
                         <i class="ri-settings-4-line" />
@@ -205,13 +205,13 @@
                     on:click={() => collectionDocsPanel?.show($activeCollection)}
                 >
                     <i class="ri-code-s-slash-line" />
-                    <span class="txt">API Preview</span>
+                    <span class="txt">API 预览</span>
                 </button>
 
                 {#if $activeCollection.type !== "view"}
                     <button type="button" class="btn btn-expanded" on:click={() => recordUpsertPanel?.show()}>
                         <i class="ri-add-line" />
-                        <span class="txt">New record</span>
+                        <span class="txt">新建记录</span>
                     </button>
                 {/if}
             </div>

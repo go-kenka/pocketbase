@@ -60,7 +60,7 @@
     function duplicateField(fieldIndex) {
         const field = collection.fields[fieldIndex];
         if (!field) {
-            return; // nothing to duplicate
+            return; // 没有可复制的内容
         }
 
         field.onMountSelect = false;
@@ -83,8 +83,8 @@
 
         field.onMountSelect = true;
 
-        // if the collection has created/updated last fields,
-        // insert before the first autodate field, otherwise - append
+        // 如果集合已创建/更新了最后的字段，
+        // 则在第一个自动日期字段之前插入，否则追加
         const idx = collection.fields.findLastIndex((f) => f.type != "autodate");
         if (field.type != "autodate" && idx >= 0) {
             collection.fields.splice(idx + 1, 0, field);
@@ -99,9 +99,9 @@
         let result = name;
         let counter = 2;
 
-        let suffix = name.match(/\d+$/)?.[0] || ""; // extract numeric suffix
+        let suffix = name.match(/\d+$/)?.[0] || ""; // 提取数字后缀
 
-        // name without the suffix
+        // 不带后缀的名称
         let base = suffix ? name.substring(0, name.length - suffix.length) : name;
 
         while (hasFieldWithName(result)) {
@@ -125,12 +125,12 @@
             return;
         }
 
-        // field with the old name exists so there is no need to rename index columns
+        // 旧名称的字段仍然存在，因此无需重命名索引列
         if (!!collection?.fields?.find((f) => f.name == oldName && !f._toDelete)) {
             return;
         }
 
-        // update indexes on renamed fields
+        // 更新重命名字段的索引
         collection.indexes = collection.indexes.map((idx) =>
             CommonHelper.replaceIndexColumn(idx, oldName, newName),
         );
@@ -153,7 +153,7 @@
                 continue;
             }
 
-            // merge the default field with the existing one
+            // 将默认字段与现有字段合并
             collection.fields[idx] = Object.assign(collection.fields[idx], oldField);
         }
 
@@ -190,19 +190,19 @@
             disabled={field._toDelete}
             dragHandleClass="drag-handle-wrapper"
             on:drag={(e) => {
-                // blank drag placeholder
+                // 空白拖拽占位符
                 if (!e.detail) {
                     return;
                 }
                 const ghost = e.detail.target;
                 ghost.style.opacity = 0;
                 setTimeout(() => {
-                    ghost?.style?.removeProperty("opacity"); // restore
+                    ghost?.style?.removeProperty("opacity"); // 恢复透明度
                 }, 0);
                 e.detail.dataTransfer.setDragImage(ghost, 0, 0);
             }}
             on:sort={() => {
-                // reset errors since the schema keys index has changed
+                // 由于架构键索引已更改，重置错误
                 setErrors({});
             }}
         >

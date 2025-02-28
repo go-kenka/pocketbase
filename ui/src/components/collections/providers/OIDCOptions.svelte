@@ -10,8 +10,8 @@
     export let config = {};
 
     const userInfoOptions = [
-        { label: "User info URL", value: true },
-        { label: "ID Token", value: false },
+        { label: "用户信息 URL", value: true },
+        { label: "ID 令牌", value: false },
     ];
 
     let hasUserInfoURL = !!config.userInfoURL;
@@ -44,24 +44,24 @@
 </script>
 
 <Field class="form-field required" name="{key}.displayName" let:uniqueId>
-    <label for={uniqueId}>Display name</label>
+    <label for={uniqueId}>显示名称</label>
     <input type="text" id={uniqueId} bind:value={config.displayName} required />
 </Field>
 
-<div class="section-title">Endpoints</div>
+<div class="section-title">端点配置</div>
 
 <Field class="form-field required" name="{key}.authURL" let:uniqueId>
-    <label for={uniqueId}>Auth URL</label>
+    <label for={uniqueId}>认证 URL</label>
     <input type="url" id={uniqueId} bind:value={config.authURL} required />
 </Field>
 
 <Field class="form-field required" name="{key}.tokenURL" let:uniqueId>
-    <label for={uniqueId}>Token URL</label>
+    <label for={uniqueId}>令牌 URL</label>
     <input type="url" id={uniqueId} bind:value={config.tokenURL} required />
 </Field>
 
 <Field class="form-field m-b-xs" let:uniqueId>
-    <label for={uniqueId}>Fetch user info from</label>
+    <label for={uniqueId}>用户信息获取方式</label>
     <ObjectSelect id={uniqueId} items={userInfoOptions} bind:keyOfSelected={hasUserInfoURL} />
 </Field>
 
@@ -69,7 +69,7 @@
     {#if hasUserInfoURL}
         <div class="content" transition:slide={{ delay: 10, duration: 150 }}>
             <Field class="form-field required" name="{key}.userInfoURL" let:uniqueId>
-                <label for={uniqueId}>User info URL</label>
+                <label for={uniqueId}>用户信息 URL</label>
                 <input type="url" id={uniqueId} bind:value={config.userInfoURL} required />
             </Field>
         </div>
@@ -77,17 +77,16 @@
         <div class="content" transition:slide={{ delay: 10, duration: 150 }}>
             <p class="txt-hint txt-sm m-b-xs">
                 <em>
-                    Both fields are considered optional because the parsed <code>id_token</code>
-                    is a direct result of the trusted server code->token exchange response.
+                    以下字段为可选项，因为解析的 <code>id_token</code> 是可信的服务器代码->令牌交换响应的直接结果。
                 </em>
             </p>
             <Field class="form-field m-b-xs" name="{key}.extra.jwksURL" let:uniqueId>
                 <label for={uniqueId}>
-                    <span class="txt">JWKS verification URL</span>
+                    <span class="txt">JWKS 验证 URL</span>
                     <i
                         class="ri-information-line link-hint"
                         use:tooltip={{
-                            text: "URL to the public token verification keys.",
+                            text: "用于公共令牌验证密钥的 URL。",
                             position: "top",
                         }}
                     />
@@ -96,11 +95,11 @@
             </Field>
             <Field class="form-field" name="{key}.extra.issuers" let:uniqueId>
                 <label for={uniqueId}>
-                    <span class="txt">Issuers</span>
+                    <span class="txt">颁发者</span>
                     <i
                         class="ri-information-line link-hint"
                         use:tooltip={{
-                            text: "Comma separated list of accepted values for the iss token claim validation.",
+                            text: "用于验证令牌声明的已接受颁发者列表，多个值用逗号分隔。",
                             position: "top",
                         }}
                     />
@@ -114,11 +113,11 @@
 <Field class="form-field" name="{key}.pkce" let:uniqueId>
     <input type="checkbox" id={uniqueId} bind:checked={config.pkce} />
     <label for={uniqueId}>
-        <span class="txt">Support PKCE</span>
+        <span class="txt">启用 PKCE</span>
         <i
             class="ri-information-line link-hint"
             use:tooltip={{
-                text: "Usually it should be safe to be always enabled as most providers will just ignore the extra query parameters if they don't support PKCE.",
+                text: "建议始终启用此选项，如果提供商不支持 PKCE，它们通常会忽略额外的查询参数。",
                 position: "right",
             }}
         />

@@ -5,9 +5,9 @@
     import CommonHelper from "@/utils/CommonHelper";
 
     export let id = "";
-    export let noOptionsText = "No options found";
-    export let selectPlaceholder = "- Select -";
-    export let searchPlaceholder = "Search...";
+    export let noOptionsText = "未找到选项";
+    export let selectPlaceholder = "- 请选择 -";
+    export let searchPlaceholder = "搜索...";
     export let items = [];
     export let multiple = false;
     export let disabled = false;
@@ -235,7 +235,7 @@
                     <!-- svelte-ignore a11y-no-static-element-interactions -->
                     <span
                         class="clear"
-                        use:tooltip={"Clear"}
+                        use:tooltip={"清除"}
                         on:click|preventDefault|stopPropagation={() => deselectItem(item)}
                     >
                         <i class="ri-close-line" />

@@ -1,7 +1,7 @@
 <script>
     import CodeBlock from "@/components/base/CodeBlock.svelte";
 
-    export let prefix = ""; // examples prefix (eg. "record.")
+    export let prefix = ""; // 示例前缀（例如："record."）
 </script>
 
 <tr>
@@ -11,21 +11,21 @@
     </td>
     <td>
         <p>
-            Comma separated string of the fields to return in the JSON response
-            <em>(by default returns all fields)</em>. Ex.:
+            以逗号分隔的字符串，指定JSON响应中要返回的字段
+            <em>（默认返回所有字段）</em>。例如：
             <CodeBlock content="?fields=*,{prefix}expand.relField.name" />
         </p>
         <p>
-            <code>*</code> targets all keys from the specific depth level.
+            <code>*</code> 表示指定深度级别的所有键。
         </p>
-        <p>In addition, the following field modifiers are also supported:</p>
+        <p>此外，还支持以下字段修饰符：</p>
         <ul>
             <li>
                 <code>:excerpt(maxLength, withEllipsis?)</code>
                 <br />
-                Returns a short plain text version of the field string value.
+                返回字段字符串值的简短纯文本版本。
                 <br />
-                Ex.:
+                例如：
                 <code>?fields=*,{prefix}description:excerpt(200,true)</code>
             </li>
         </ul>

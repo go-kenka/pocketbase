@@ -8,8 +8,8 @@
     export let collection;
 
     const apiTabs = [
-        { title: "Request email change", component: EmailChangeApiRequestDocs },
-        { title: "Confirm email change", component: EmailChangeApiConfirmDocs },
+        { title: "请求邮箱变更", component: EmailChangeApiRequestDocs },
+        { title: "确认邮箱变更", component: EmailChangeApiConfirmDocs },
     ];
 
     let activeApiTab = 0;
@@ -17,13 +17,10 @@
     $: backendAbsUrl = CommonHelper.getApiExampleUrl(ApiClient.baseURL);
 </script>
 
-<h3 class="m-b-sm">Email change ({collection.name})</h3>
+<h3 class="m-b-sm">邮箱变更 ({collection.name})</h3>
 <div class="content txt-lg m-b-sm">
-    <p>Sends <strong>{collection.name}</strong> email change request.</p>
-    <p>
-        On successful email change all previously issued auth tokens for the specific record will be
-        automatically invalidated.
-    </p>
+    <p>发送 <strong>{collection.name}</strong> 邮箱变更请求。</p>
+    <p>邮箱变更成功后，该记录之前签发的所有认证令牌将自动失效。</p>
 </div>
 
 <SdkTabs
@@ -73,7 +70,7 @@
     `}
 />
 
-<h6 class="m-b-xs">API details</h6>
+<h6 class="m-b-xs">API详情</h6>
 <div class="tabs">
     <div class="tabs-header compact">
         {#each apiTabs as tab, i}

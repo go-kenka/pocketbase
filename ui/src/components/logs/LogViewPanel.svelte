@@ -53,7 +53,7 @@
             if (!err.isAbort) {
                 hide();
                 console.warn("resolveModel:", err);
-                addErrorToast(`Unable to load log with id "${modelOrId}"`);
+                addErrorToast(`无法加载ID为"${modelOrId}"的日志`);
             }
         }
 
@@ -77,6 +77,26 @@
         "error",
         "details",
     ];
+
+    const priotizedKeyNames = {
+        execTime: "执行时间",
+        type: "类型",
+        auth: "认证",
+        authId: "认证ID",
+        status: "状态",
+        method: "方法",
+        url: "URL",
+        referer: "来源地址",
+        remoteIP: "远程IP",
+        userIP: "用户IP",
+        userAgent: "用户代理",
+        error: "错误",
+        details: "详情",
+    };
+
+    function extractKeyName(key) {
+        return priotizedKeyNames[key] || key;
+    }
 
     function extractKeys(data) {
         if (!data) {
@@ -122,7 +142,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <OverlayPanel bind:this={logPanel} class="overlay-panel-lg log-panel" on:hide={onHide}>
     <svelte:fragment slot="header">
-        <h4>Log details</h4>
+        <h4>日志详情</h4>
     </svelte:fragment>
 
     {#if isLoading}
@@ -133,7 +153,7 @@
         <table class="table-border">
             <tbody>
                 <tr>
-                    <td class="min-width txt-hint txt-bold">id</td>
+                    <td class="min-width txt-hint txt-bold">ID</td>
                     <td>
                         <span class="txt">{log.id}</span>
                         <div class="copy-icon-wrapper">
@@ -142,7 +162,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="min-width txt-hint txt-bold">level</td>
+                    <td class="min-width txt-hint txt-bold">级别</td>
                     <td>
                         <LogLevel level={log.level} />
                         <div class="copy-icon-wrapper">
@@ -151,7 +171,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="min-width txt-hint txt-bold">created</td>
+                    <td class="min-width txt-hint txt-bold">创建时间</td>
                     <td>
                         <LogDate date={log.created} />
                         <div class="copy-icon-wrapper">
@@ -161,7 +181,7 @@
                 </tr>
                 {#if !isRequest}
                     <tr>
-                        <td class="min-width txt-hint txt-bold">message</td>
+                        <td class="min-width txt-hint txt-bold">消息</td>
                         <td>
                             {#if log.message}
                                 <span class="txt">{log.message}</span>
@@ -181,7 +201,7 @@
                     {@const isJson = !isEmpty && value !== null && typeof value == "object"}
                     <tr>
                         <td class="min-width txt-hint txt-bold" class:v-align-top={isJson}>
-                            data.{key}
+                            数据.{extractKeyName(key)}
                         </td>
                         <td>
                             {#if isEmpty}
@@ -214,12 +234,12 @@
 
     <svelte:fragment slot="footer">
         <button type="button" class="btn btn-transparent" on:click={() => hide()}>
-            <span class="txt">Close</span>
+            <span class="txt">关闭</span>
         </button>
 
         <button type="button" class="btn btn-primary" disabled={isLoading} on:click={() => downloadJson()}>
             <i class="ri-download-line" />
-            <span class="txt">Download as JSON</span>
+            <span class="txt">下载为JSON</span>
         </button>
     </svelte:fragment>
 </OverlayPanel>

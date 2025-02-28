@@ -8,8 +8,8 @@
     export let collection;
 
     const apiTabs = [
-        { title: "Request password reset", component: PasswordResetApiRequestDocs },
-        { title: "Confirm password reset", component: PasswordResetApiConfirmDocs },
+        { title: "请求密码重置", component: PasswordResetApiRequestDocs },
+        { title: "确认密码重置", component: PasswordResetApiConfirmDocs },
     ];
 
     let activeApiTab = 0;
@@ -17,13 +17,10 @@
     $: backendAbsUrl = CommonHelper.getApiExampleUrl(ApiClient.baseURL);
 </script>
 
-<h3 class="m-b-sm">Password reset ({collection.name})</h3>
+<h3 class="m-b-sm">密码重置 ({collection.name})</h3>
 <div class="content txt-lg m-b-sm">
-    <p>Sends <strong>{collection.name}</strong> password reset email request.</p>
-    <p>
-        On successful password reset all previously issued auth tokens for the specific record will be
-        automatically invalidated.
-    </p>
+    <p>发送 <strong>{collection.name}</strong> 密码重置邮件请求。</p>
+    <p>密码重置成功后，该记录之前签发的所有认证令牌将自动失效。</p>
 </div>
 
 <SdkTabs
@@ -69,7 +66,7 @@
     `}
 />
 
-<h6 class="m-b-xs">API details</h6>
+<h6 class="m-b-xs">API详情</h6>
 <div class="tabs">
     <div class="tabs-header compact">
         {#each apiTabs as tab, i}

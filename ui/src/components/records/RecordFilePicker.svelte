@@ -15,8 +15,8 @@
     const uniqueId = "file_picker_" + CommonHelper.randomString(5);
     const batchSize = 50;
 
-    export let title = "Select a file";
-    export let submitText = "Insert";
+    export let title = "选择文件";
+    export let submitText = "插入";
     export let fileTypes = ["image", "document", "video", "audio", "file"];
 
     let pickerPanel;
@@ -248,7 +248,7 @@
                 <div class="flex m-b-base flex-gap-10">
                     <Searchbar
                         value={filter}
-                        placeholder="Record search term or filter..."
+                        placeholder="输入记录搜索词或过滤条件..."
                         autocompleteCollection={selectedCollection}
                         on:submit={(e) => (filter = e.detail)}
                     />
@@ -257,7 +257,7 @@
                         class="btn btn-pill btn-transparent btn-hint p-l-xs p-r-xs"
                         on:click={() => upsertPanel?.show()}
                     >
-                        <div class="txt">New record</div>
+                        <div class="txt">新建记录</div>
                     </button>
                 </div>
                 <Scroller
@@ -294,14 +294,14 @@
                         {/each}
                     {:else if !isLoading}
                         <div class="inline-flex">
-                            <span class="txt txt-hint">No records with images found.</span>
+                            <span class="txt txt-hint">未找到包含文件的记录。</span>
                             {#if filter?.length}
                                 <button
                                     type="button"
                                     class="btn btn-hint btn-sm"
                                     on:click|preventDefault={clearFilter}
                                 >
-                                    <span class="txt">Clear filter</span>
+                                    <span class="txt">清除过滤条件</span>
                                 </button>
                             {/if}
                         </div>
@@ -319,7 +319,7 @@
 
     <svelte:fragment slot="footer">
         <button type="button" class="btn btn-transparent m-r-auto" disabled={isLoading} on:click={hide}>
-            <span class="txt">Cancel</span>
+            <span class="txt">取消</span>
         </button>
 
         {#if CommonHelper.hasImageExtension(selectedFile?.name)}
@@ -329,7 +329,7 @@
                     id={uniqueId}
                     items={sizeOptions}
                     disabled={!canSubmit}
-                    selectPlaceholder="Select size"
+                    selectPlaceholder="选择尺寸"
                     bind:keyOfSelected={selectedSize}
                 />
             </Field>

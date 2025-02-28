@@ -234,7 +234,7 @@
                     {#if btnClose && !popup}
                         <button
                             type="button"
-                            aria-label="Close"
+                            aria-label="关闭"
                             class="overlay-close"
                             transition:fade={{ duration: transitionSpeed }}
                             on:click|preventDefault={hide}
@@ -248,7 +248,7 @@
                     {#if btnClose && popup}
                         <button
                             type="button"
-                            aria-label="Close"
+                            aria-label="关闭"
                             class="btn btn-sm btn-circle btn-transparent btn-close m-l-auto"
                             on:click|preventDefault={hide}
                         >

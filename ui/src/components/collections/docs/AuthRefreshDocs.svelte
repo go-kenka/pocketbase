@@ -29,7 +29,7 @@
             body: `
                 {
                   "status": 401,
-                  "message": "The request requires valid record authorization token to be set.",
+                  "message": "请求需要设置有效的记录授权令牌。",
                   "data": {}
                 }
             `,
@@ -39,7 +39,7 @@
             body: `
                 {
                   "status": 403,
-                  "message": "The authorized record model is not allowed to perform this action.",
+                  "message": "已授权的记录模型不允许执行此操作。",
                   "data": {}
                 }
             `,
@@ -49,7 +49,7 @@
             body: `
                 {
                   "status": 404,
-                  "message": "Missing auth record context.",
+                  "message": "缺少认证记录上下文。",
                   "data": {}
                 }
             `,
@@ -57,15 +57,13 @@
     ];
 </script>
 
-<h3 class="m-b-sm">Auth refresh ({collection.name})</h3>
+<h3 class="m-b-sm">认证刷新 ({collection.name})</h3>
 <div class="content txt-lg m-b-sm">
     <p>
-        Returns a new auth response (token and record data) for an
-        <strong>already authenticated record</strong>.
+        为<strong>已认证的记录</strong>返回新的认证响应（令牌和记录数据）。
     </p>
     <p>
-        This method is usually called by users on page/screen reload to ensure that the previously stored data
-        in <code>pb.authStore</code> is still valid and up-to-date.
+        此方法通常在页面/屏幕重新加载时被调用，以确保存储在 <code>pb.authStore</code> 中的数据仍然有效且是最新的。
     </p>
 </div>
 
@@ -100,7 +98,7 @@
     `}
 />
 
-<h6 class="m-b-xs">API details</h6>
+<h6 class="m-b-xs">API 详情</h6>
 <div class="alert alert-success">
     <strong class="label label-primary">POST</strong>
     <div class="content">
@@ -108,16 +106,16 @@
             /api/collections/<strong>{collection.name}</strong>/auth-refresh
         </p>
     </div>
-    <p class="txt-hint txt-sm txt-right">Requires <code>Authorization:TOKEN</code> header</p>
+    <p class="txt-hint txt-sm txt-right">需要 <code>Authorization:TOKEN</code> 请求头</p>
 </div>
 
-<div class="section-title">Query parameters</div>
+<div class="section-title">查询参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="60%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="60%">描述</th>
         </tr>
     </thead>
     <tbody>
@@ -127,20 +125,20 @@
                 <span class="label">String</span>
             </td>
             <td>
-                Auto expand record relations. Ex.:
+                自动展开记录关联。示例：
                 <CodeBlock content={`?expand=relField1,relField2.subRelField`} />
-                Supports up to 6-levels depth nested relations expansion. <br />
-                The expanded relations will be appended to the record under the
-                <code>expand</code> property (eg. <code>{`"expand": {"relField1": {...}, ...}`}</code>).
+                支持最多6层深度的嵌套关联展开。<br />
+                展开的关联将附加到记录的 <code>expand</code> 属性下
+                （例如：<code>{`"expand": {"relField1": {...}, ...}`}</code>）。
                 <br />
-                Only the relations to which the request user has permissions to <strong>view</strong> will be expanded.
+                只有请求用户具有<strong>查看</strong>权限的关联才会被展开。
             </td>
         </tr>
         <FieldsQueryParam prefix="record." />
     </tbody>
 </table>
 
-<div class="section-title">Responses</div>
+<div class="section-title">响应</div>
 <div class="tabs">
     <div class="tabs-header compact combined left">
         {#each responses as response (response.code)}

@@ -9,12 +9,12 @@
     $: backendAbsUrl = CommonHelper.getApiExampleUrl(ApiClient.baseURL);
 </script>
 
-<h3 class="m-b-sm">Realtime ({collection.name})</h3>
+<h3 class="m-b-sm">实时 ({collection.name})</h3>
 <div class="content txt-lg m-b-sm">
-    <p>Subscribe to realtime changes via Server-Sent Events (SSE).</p>
+    <p>通过服务器发送事件（SSE）订阅实时更改。</p>
     <p>
-        Events are sent for <strong>create</strong>, <strong>update</strong>
-        and <strong>delete</strong> record operations (see "Event data format" section below).
+        事件将在记录的<strong>创建</strong>、<strong>更新</strong>
+        和<strong>删除</strong>操作时发送（参见下方的"事件数据格式"部分）。
     </p>
 </div>
 <div class="alert alert-info m-t-10 m-b-sm">
@@ -23,17 +23,15 @@
     </div>
     <div class="contet">
         <p>
-            <strong>You could subscribe to a single record or to an entire collection.</strong>
+            <strong>您可以订阅单条记录或整个集合。</strong>
         </p>
         <p>
-            When you subscribe to a <strong>single record</strong>, the collection's
-            <strong>ViewRule</strong> will be used to determine whether the subscriber has access to receive the
-            event message.
+            当您订阅<strong>单条记录</strong>时，系统将使用集合的
+            <strong>ViewRule</strong>来确定订阅者是否有权限接收事件消息。
         </p>
         <p>
-            When you subscribe to an <strong>entire collection</strong>, the collection's
-            <strong>ListRule</strong> will be used to determine whether the subscriber has access to receive the
-            event message.
+            当您订阅<strong>整个集合</strong>时，系统将使用集合的
+            <strong>ListRule</strong>来确定订阅者是否有权限接收事件消息。
         </p>
     </div>
 </div>
@@ -95,7 +93,7 @@
     `}
 />
 
-<h6 class="m-b-xs">API details</h6>
+<h6 class="m-b-xs">API 详情</h6>
 <div class="alert">
     <strong class="label label-primary">SSE</strong>
     <div class="content">
@@ -103,7 +101,7 @@
     </div>
 </div>
 
-<div class="section-title">Event data format</div>
+<div class="section-title">事件数据格式</div>
 <CodeBlock
     content={JSON.stringify(
         {

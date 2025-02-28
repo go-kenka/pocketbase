@@ -16,40 +16,39 @@
     <svelte:fragment slot="header">
         <div class="inline-flex">
             <i class="ri-shield-check-line"></i>
-            <span class="txt"> Multi-factor authentication (MFA) </span>
+            <span class="txt"> 多因素认证 (MFA) </span>
         </div>
 
         <div class="flex-fill" />
 
         {#if collection.mfa.enabled}
-            <span class="label label-success">Enabled</span>
+            <span class="label label-success">已启用</span>
         {:else}
-            <span class="label">Disabled</span>
+            <span class="label">已禁用</span>
         {/if}
 
         {#if hasErrors}
             <i
                 class="ri-error-warning-fill txt-danger"
                 transition:scale={{ duration: 150, start: 0.7 }}
-                use:tooltip={{ text: "Has errors", position: "left" }}
+                use:tooltip={{ text: "存在错误", position: "left" }}
             />
         {/if}
     </svelte:fragment>
 
     <div class="content m-b-sm">
-        <p class="txt-bold">This feature is experimental and may change in the future.</p>
+        <p class="txt-bold">此功能目前处于实验阶段，未来可能会发生变化。</p>
         <p>
-            Multi-factor authentication (MFA) requires the user to authenticate with any 2 different auth
-            methods (otp, identity/password, oauth2) before issuing an auth token.
+            多因素认证 (MFA) 要求用户使用两种不同的认证方式（一次性密码、账号密码、OAuth2）进行验证后才能获取认证令牌。
             <a
                 href={import.meta.env.PB_MFA_DOCS}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="txt-sm link-hint"
-                title="Learn more"
+                title="了解更多"
             >
-                <em>(Learn more)</em>
-            </a>.
+                <em>(了解更多)</em>
+            </a>。
         </p>
     </div>
 
@@ -57,27 +56,27 @@
         <Field class="form-field form-field-toggle" name="mfa.enabled" let:uniqueId>
             <input type="checkbox" id={uniqueId} bind:checked={collection.mfa.enabled} />
             <label for={uniqueId}>
-                <span class="txt">Enable</span>
+                <span class="txt">启用</span>
             </label>
         </Field>
 
         <div class="content" class:fade={!collection.mfa.enabled}>
             <RuleField
-                label="MFA rule"
+                label="MFA规则"
                 formKey="mfa.rule"
                 superuserToggle={false}
                 disabled={!collection.mfa.enabled}
-                placeholder="Leave empty to require MFA for everyone"
+                placeholder="留空则对所有用户启用MFA"
                 {collection}
                 bind:rule={collection.mfa.rule}
             >
                 <svelte:fragment>
-                    <p>This optional rule could be used to enable/disable MFA per account basis.</p>
+                    <p>此可选规则可用于按账户启用/禁用MFA。</p>
                     <p>
-                        For example, to require MFA only for accounts with non-empty email you can set it to
-                        <code>email != ''</code>.
+                        例如，要仅对具有非空电子邮件的账户启用MFA，可以设置为
+                        <code>email != ''</code>。
                     </p>
-                    <p>Leave the rule empty to require MFA for everyone.</p>
+                    <p>留空则对所有用户启用MFA。</p>
                 </svelte:fragment>
             </RuleField>
         </div>

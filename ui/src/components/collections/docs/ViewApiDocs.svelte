@@ -46,9 +46,9 @@
     }
 </script>
 
-<h3 class="m-b-sm">View ({collection.name})</h3>
+<h3 class="m-b-sm">查看 ({collection.name})</h3>
 <div class="content txt-lg m-b-sm">
-    <p>Fetch a single <strong>{collection.name}</strong> record.</p>
+    <p>获取单个 <strong>{collection.name}</strong> 记录。</p>
 </div>
 
 <SdkTabs
@@ -59,6 +59,7 @@
 
         ...
 
+        // 获取单条记录
         const record = await pb.collection('${collection?.name}').getOne('RECORD_ID', {
             expand: 'relField1,relField2.subRelField',
         });
@@ -70,13 +71,14 @@
 
         ...
 
+        // 获取单条记录
         final record = await pb.collection('${collection?.name}').getOne('RECORD_ID',
           expand: 'relField1,relField2.subRelField',
         );
     `}
 />
 
-<h6 class="m-b-xs">API details</h6>
+<h6 class="m-b-xs">API 详情</h6>
 <div class="alert alert-info">
     <strong class="label label-primary">GET</strong>
     <div class="content">
@@ -85,17 +87,17 @@
         </p>
     </div>
     {#if superusersOnly}
-        <p class="txt-hint txt-sm txt-right">Requires superuser <code>Authorization:TOKEN</code> header</p>
+        <p class="txt-hint txt-sm txt-right">需要超级用户 <code>Authorization:TOKEN</code> 请求头</p>
     {/if}
 </div>
 
-<div class="section-title">Path Parameters</div>
+<div class="section-title">路径参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="60%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="60%">描述</th>
         </tr>
     </thead>
     <tbody>
@@ -104,18 +106,18 @@
             <td>
                 <span class="label">String</span>
             </td>
-            <td>ID of the record to view.</td>
+            <td>要查看的记录ID。</td>
         </tr>
     </tbody>
 </table>
 
-<div class="section-title">Query parameters</div>
+<div class="section-title">查询参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="60%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="60%">描述</th>
         </tr>
     </thead>
     <tbody>
@@ -125,20 +127,20 @@
                 <span class="label">String</span>
             </td>
             <td>
-                Auto expand record relations. Ex.:
+                自动展开记录关联。例如：
                 <CodeBlock content={`?expand=relField1,relField2.subRelField`} />
-                Supports up to 6-levels depth nested relations expansion. <br />
-                The expanded relations will be appended to the record under the
-                <code>expand</code> property (eg. <code>{`"expand": {"relField1": {...}, ...}`}</code>).
+                支持最多6层深度的嵌套关联展开。<br />
+                展开的关联将附加到记录的
+                <code>expand</code> 属性下（如：<code>{`"expand": {"relField1": {...}, ...}`}</code>）。
                 <br />
-                Only the relations to which the request user has permissions to <strong>view</strong> will be expanded.
+                只有请求用户有权限<strong>查看</strong>的关联才会被展开。
             </td>
         </tr>
         <FieldsQueryParam />
     </tbody>
 </table>
 
-<div class="section-title">Responses</div>
+<div class="section-title">响应</div>
 <div class="tabs">
     <div class="tabs-header compact combined left">
         {#each responses as response (response.code)}

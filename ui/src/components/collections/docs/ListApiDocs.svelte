@@ -61,10 +61,10 @@
     }
 </script>
 
-<h3 class="m-b-sm">List/Search ({collection.name})</h3>
+<h3 class="m-b-sm">列表/搜索 ({collection.name})</h3>
 <div class="content txt-lg m-b-sm">
     <p>
-        Fetch a paginated <strong>{collection.name}</strong> records list, supporting sorting and filtering.
+        获取分页的 <strong>{collection.name}</strong> 记录列表，支持排序和过滤。
     </p>
 </div>
 
@@ -118,7 +118,7 @@
     `}
 />
 
-<h6 class="m-b-xs">API details</h6>
+<h6 class="m-b-xs">API 详情</h6>
 <div class="alert alert-info">
     <strong class="label label-primary">GET</strong>
     <div class="content">
@@ -127,17 +127,17 @@
         </p>
     </div>
     {#if superusersOnly}
-        <p class="txt-hint txt-sm txt-right">Requires superuser <code>Authorization:TOKEN</code> header</p>
+        <p class="txt-hint txt-sm txt-right">需要超级用户 <code>Authorization:TOKEN</code> 头部</p>
     {/if}
 </div>
 
-<div class="section-title">Query parameters</div>
+<div class="section-title">查询参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="60%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="60%">描述</th>
         </tr>
     </thead>
     <tbody>
@@ -146,14 +146,14 @@
             <td>
                 <span class="label">Number</span>
             </td>
-            <td>The page (aka. offset) of the paginated list (default to 1).</td>
+            <td>分页列表的页码（即偏移量）（默认为1）。</td>
         </tr>
         <tr>
             <td>perPage</td>
             <td>
                 <span class="label">Number</span>
             </td>
-            <td>Specify the max returned records per page (default to 30).</td>
+            <td>指定每页返回的最大记录数（默认为30）。</td>
         </tr>
         <tr>
             <td>sort</td>
@@ -161,17 +161,16 @@
                 <span class="label">String</span>
             </td>
             <td>
-                Specify the records order attribute(s). <br />
-                Add <code>-</code> / <code>+</code> (default) in front of the attribute for DESC / ASC order.
-                Ex.:
+                指定记录排序属性。<br />
+                在属性前添加 <code>-</code> / <code>+</code>（默认）表示降序/升序。 例如：
                 <CodeBlock
                     content={`
-                        // DESC by created and ASC by id
+                        // 按created降序，按id升序
                         ?sort=-created,id
                     `}
                 />
                 <p>
-                    <strong>Supported record sort fields:</strong> <br />
+                    <strong>支持的记录排序字段：</strong> <br />
                     <code>@random</code>,
                     <code>@rowid</code>,
                     {#each fieldNames as name, i}
@@ -186,7 +185,7 @@
                 <span class="label">String</span>
             </td>
             <td>
-                Filter the returned records. Ex.:
+                过滤返回的记录。例如：
                 <CodeBlock
                     content={`
                         ?filter=(id='abc' && created>'2022-01-01')
@@ -201,13 +200,13 @@
                 <span class="label">String</span>
             </td>
             <td>
-                Auto expand record relations. Ex.:
+                自动展开记录关联。例如：
                 <CodeBlock content={`?expand=relField1,relField2.subRelField`} />
-                Supports up to 6-levels depth nested relations expansion. <br />
-                The expanded relations will be appended to each individual record under the
-                <code>expand</code> property (eg. <code>{`"expand": {"relField1": {...}, ...}`}</code>).
+                支持最多6层深度的嵌套关联展开。<br />
+                展开的关联将附加到每个记录的
+                <code>expand</code> 属性下（如：<code>{`"expand": {"relField1": {...}, ...}`}</code>）。
                 <br />
-                Only the relations to which the request user has permissions to <strong>view</strong> will be expanded.
+                只有请求用户有权限<strong>查看</strong>的关联才会被展开。
             </td>
         </tr>
         <FieldsQueryParam />
@@ -217,22 +216,21 @@
                 <span class="label">Boolean</span>
             </td>
             <td>
-                If it is set the total counts query will be skipped and the response fields
-                <code>totalItems</code> and <code>totalPages</code> will have <code>-1</code> value.
+                如果设置此项，将跳过总数查询，响应字段
+                <code>totalItems</code> 和 <code>totalPages</code> 将为 <code>-1</code> 值。
                 <br />
-                This could drastically speed up the search queries when the total counters are not needed or cursor
-                based pagination is used.
+                当不需要总数计数或使用基于游标的分页时，这可以大大加快搜索查询速度。
                 <br />
-                For optimization purposes, it is set by default for the
+                出于优化目的，在SDK的
                 <code>getFirstListItem()</code>
-                and
-                <code>getFullList()</code> SDKs methods.
+                和
+                <code>getFullList()</code> 方法中默认设置此项。
             </td>
         </tr>
     </tbody>
 </table>
 
-<div class="section-title">Responses</div>
+<div class="section-title">响应</div>
 <div class="tabs">
     <div class="tabs-header compact combined left">
         {#each responses as response (response.code)}

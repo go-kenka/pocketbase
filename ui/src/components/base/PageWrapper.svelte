@@ -18,7 +18,7 @@
         {#if $superuser?.id}
             <a href={import.meta.env.PB_DOCS_URL} target="_blank" rel="noopener noreferrer">
                 <i class="ri-book-open-line txt-sm" />
-                <span class="txt">Docs</span>
+                <span class="txt">文档</span>
             </a>
             <span class="delimiter">|</span>
             <a href={import.meta.env.PB_RELEASES} target="_blank" rel="noopener noreferrer" title="Releases">

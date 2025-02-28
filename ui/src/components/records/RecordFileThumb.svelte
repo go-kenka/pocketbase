@@ -28,7 +28,7 @@
         try {
             token = await ApiClient.getSuperuserFileToken(record.collectionId);
         } catch (err) {
-            console.warn("File token failure:", err);
+            console.warn("获取文件令牌失败:", err);
         }
 
         isLoadingToken = false;
@@ -46,7 +46,7 @@
         type="button"
         draggable={false}
         class="handle thumb {size ? `thumb-${size}` : ''}"
-        title={(hasPreview ? "Preview" : "Download") + " " + filename}
+        title={(hasPreview ? "预览" : "下载") + " " + filename}
         on:click|stopPropagation={async () => {
             if (!hasPreview) {
                 return;
@@ -60,7 +60,7 @@
                 });
             } catch (err) {
                 if (!err.isAbort) {
-                    console.warn("Preview file token failure:", err);
+                    console.warn("预览文件令牌获取失败:", err);
                 }
             }
         }}
@@ -71,7 +71,7 @@
                 loading="lazy"
                 src={thumbUrl}
                 alt={filename}
-                title="Preview {filename}"
+                title="预览 {filename}"
                 on:error={onError}
             />
         {:else if type === "video" || type === "audio"}

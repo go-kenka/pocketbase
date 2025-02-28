@@ -26,8 +26,8 @@
         }
 
         confirm(
-            `Note that we don't perform validations for the uploaded backup files. Proceed with caution and only if you trust the source.\n\n` +
-                `Do you really want to upload "${file.name}"?`,
+            `请注意，我们不会对上传的备份文件进行验证。请谨慎操作，仅在您信任文件来源时继续。\n\n` +
+                `您确定要上传 "${file.name}" 吗？`,
             () => {
                 upload(file);
             },
@@ -51,7 +51,7 @@
             await ApiClient.backups.upload(data, { requestKey: backupRequestKey });
             isUploading = false;
             dispatch("success");
-            addSuccessToast("Successfully uploaded a new backup.");
+            addSuccessToast("已成功上传新的备份文件。");
         } catch (err) {
             if (!err.isAbort) {
                 isUploading = false;
@@ -76,8 +76,8 @@
     class="btn btn-circle btn-transparent {classes}"
     class:btn-loading={isUploading}
     class:btn-disabled={isUploading}
-    aria-label="Upload backup"
-    use:tooltip={"Upload backup"}
+    aria-label="上传备份"
+    use:tooltip={"上传备份"}
     on:click={() => fileInput?.click()}
 >
     <i class="ri-upload-cloud-line" />

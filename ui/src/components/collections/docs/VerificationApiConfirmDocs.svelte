@@ -38,13 +38,13 @@
     </div>
 </div>
 
-<div class="section-title">Body Parameters</div>
+<div class="section-title">Body参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="50%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="50%">描述</th>
         </tr>
     </thead>
     <tbody>
@@ -58,12 +58,12 @@
             <td>
                 <span class="label">String</span>
             </td>
-            <td>The token from the verification request email.</td>
+            <td>验证请求邮件中的令牌。</td>
         </tr>
     </tbody>
 </table>
 
-<div class="section-title">Responses</div>
+<div class="section-title">响应</div>
 <div class="tabs">
     <div class="tabs-header compact combined left">
         {#each responses as response (response.code)}

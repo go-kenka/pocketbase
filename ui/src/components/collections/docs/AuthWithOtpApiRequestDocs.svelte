@@ -23,11 +23,11 @@
             body: `
                 {
                   "status": 400,
-                  "message": "An error occurred while validating the submitted data.",
+                  "message": "提交的数据验证时发生错误。",
                   "data": {
                     "email": {
                       "code": "validation_is_email",
-                      "message": "Must be a valid email address."
+                      "message": "必须是有效的邮箱地址。"
                     }
                   }
                 }
@@ -38,7 +38,7 @@
             body: `
                 {
                   "status": 429,
-                  "message": "You've send too many OTP requests, please try again later.",
+                  "message": "您发送了太多OTP请求，请稍后再试。",
                   "data": {}
                 }
             `,
@@ -55,32 +55,32 @@
     </div>
 </div>
 
-<div class="section-title">Body Parameters</div>
+<div class="section-title">请求参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="50%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="50%">描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
                 <div class="inline-flex">
-                    <span class="label label-success">Required</span>
+                    <span class="label label-success">必填</span>
                     <span>email</span>
                 </div>
             </td>
             <td>
                 <span class="label">String</span>
             </td>
-            <td>The auth record email address to send the OTP request (if exists).</td>
+            <td>用于发送OTP请求的认证记录邮箱地址（如果存在）。</td>
         </tr>
     </tbody>
 </table>
 
-<div class="section-title">Responses</div>
+<div class="section-title">响应结果</div>
 <div class="tabs">
     <div class="tabs-header compact combined left">
         {#each responses as response (response.code)}

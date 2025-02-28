@@ -17,8 +17,8 @@
 
     const customRequiredLabels = {
         // type => label
-        bool: "Nonfalsey",
-        number: "Nonzero",
+        bool: "非空值",
+        number: "非零值",
     };
 
     // @todo refactor once the UI is dynamic
@@ -59,7 +59,7 @@
 
     $: hasErrors = !CommonHelper.isEmpty(CommonHelper.getNestedVal($errors, `fields.${key}`));
 
-    $: requiredLabel = customRequiredLabels[field?.type] || "Nonempty";
+    $: requiredLabel = customRequiredLabels[field?.type] || "非空";
 
     function remove() {
         if (!field.id) {
@@ -154,7 +154,7 @@
                     <span class="label label-success">{requiredLabel}</span>
                 {/if}
                 {#if field.hidden}
-                    <span class="label label-danger">Hidden</span>
+                    <span class="label label-danger">隐藏</span>
                 {/if}
             </div>
 
@@ -175,9 +175,9 @@
                 required
                 disabled={!interactive || field.system}
                 spellcheck="false"
-                placeholder="Field name"
+                placeholder="字段名称"
                 value={field.name}
-                title="System field"
+                title="系统字段"
                 on:input={(e) => {
                     const oldName = field.name;
                     field.name = normalizeFieldName(e.target.value);
@@ -196,8 +196,8 @@
             <button
                 type="button"
                 class="btn btn-sm btn-circle btn-success btn-transparent options-trigger"
-                aria-label="Restore"
-                use:tooltip={"Restore"}
+                aria-label="恢复"
+                use:tooltip={"恢复"}
                 on:click={restore}
             >
                 <i class="ri-restart-line" />
@@ -205,7 +205,7 @@
         {:else if interactive}
             <button
                 type="button"
-                aria-label="Toggle {field.name} field options"
+                aria-label="切换 {field.name} 字段选项"
                 class="btn btn-sm btn-circle options-trigger {showOptions
                     ? 'btn-secondary'
                     : 'btn-transparent'}"
@@ -235,9 +235,7 @@
                             <i
                                 class="ri-information-line link-hint"
                                 use:tooltip={{
-                                    text: `Requires the field value NOT to be ${CommonHelper.zeroDefaultStr(
-                                        field,
-                                    )}.`,
+                                    text: `要求字段值不能为 ${CommonHelper.zeroDefaultStr(field)}.`,
                                 }}
                             />
                         </label>
@@ -257,11 +255,11 @@
                             }}
                         />
                         <label for={uniqueId}>
-                            <span class="txt">Hidden</span>
+                            <span class="txt">隐藏</span>
                             <i
                                 class="ri-information-line link-hint"
                                 use:tooltip={{
-                                    text: `Hide from the JSON API response and filters.`,
+                                    text: `从JSON API响应和过滤器中隐藏。`,
                                 }}
                             />
                         </label>
@@ -277,11 +275,11 @@
                             disabled={field.hidden}
                         />
                         <label for={uniqueId}>
-                            <span class="txt">Presentable</span>
+                            <span class="txt">可展示</span>
                             <i
                                 class="ri-information-line {field.hidden ? 'txt-disabled' : 'link-hint'}"
                                 use:tooltip={{
-                                    text: `Whether the field should be preferred in the Superuser UI relation listings (default to auto).`,
+                                    text: `该字段是否应在超级用户UI关系列表中优先显示（默认为自动）。`,
                                 }}
                             />
                         </label>
@@ -296,7 +294,7 @@
                             <div
                                 tabindex="0"
                                 role="button"
-                                title="More field options"
+                                title="更多字段选项"
                                 class="btn btn-circle btn-sm btn-transparent"
                             >
                                 <i class="ri-more-line" aria-hidden="true" />
@@ -309,7 +307,7 @@
                                         role="menuitem"
                                         on:click|preventDefault={duplicate}
                                     >
-                                        <span class="txt">Duplicate</span>
+                                        <span class="txt">复制</span>
                                     </button>
                                     {#if !field.system}
                                         <button
@@ -318,7 +316,7 @@
                                             role="menuitem"
                                             on:click|preventDefault={remove}
                                         >
-                                            <span class="txt">Remove</span>
+                                            <span class="txt">删除</span>
                                         </button>
                                     {/if}
                                 </Toggler>

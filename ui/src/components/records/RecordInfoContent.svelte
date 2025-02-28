@@ -21,8 +21,8 @@
         fileDisplayFields = fields.filter((f) => !f.hidden && f.presentable && f.type == "file");
         nonFileDisplayFields = fields.filter((f) => !f.hidden && f.presentable && f.type != "file");
 
-        // fallback to the first single file field that accept images
-        // if no presentable field is available
+        // 如果没有可展示的字段，则回退到第一个接受图片的单文件字段
+        // 作为备选显示字段
         if (!fileDisplayFields.length && !nonFileDisplayFields.length) {
             const fallbackFileField = fields.find((f) => {
                 return (

@@ -9,8 +9,8 @@
     export let key = "";
 
     const isSingleOptions = [
-        { label: "Single", value: true },
-        { label: "Multiple", value: false },
+        { label: "单选", value: true },
+        { label: "多选", value: false },
     ];
 
     let isSingle = field.maxSelect <= 1;
@@ -47,10 +47,10 @@
             name="fields.{key}.values"
             let:uniqueId
         >
-            <div use:tooltip={{ text: "Choices (comma separated)", position: "top-left", delay: 700 }}>
+            <div use:tooltip={{ text: "选项（用逗号分隔）", position: "top-left", delay: 700 }}>
                 <MultipleValueInput
                     id={uniqueId}
-                    placeholder="Choices: eg. optionA, optionB"
+                    placeholder="选项：例如 选项A, 选项B"
                     required
                     readonly={!interactive}
                     bind:value={field.values}
@@ -79,14 +79,14 @@
     <svelte:fragment slot="options">
         {#if !isSingle}
             <Field class="form-field" name="fields.{key}.maxSelect" let:uniqueId>
-                <label for={uniqueId}>Max select</label>
+                <label for={uniqueId}>最大选择数量</label>
                 <input
                     id={uniqueId}
                     type="number"
                     step="1"
                     min="2"
                     max={field.values.length}
-                    placeholder="Default to single"
+                    placeholder="默认为单选"
                     bind:value={field.maxSelect}
                 />
             </Field>

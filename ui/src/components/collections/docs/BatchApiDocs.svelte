@@ -75,9 +75,9 @@
     }
 </script>
 
-<h3 class="m-b-sm">Batch create/update/upsert/delete ({collection.name})</h3>
+<h3 class="m-b-sm">批量创建/更新/插入/删除 ({collection.name})</h3>
 <div class="content txt-lg m-b-sm">
-    <p>Batch and transactional create/update/upsert/delete of multiple records in a single request.</p>
+    <p>在单个请求中批量和事务性地创建/更新/插入/删除多条记录。</p>
 </div>
 
 <div class="alert alert-warning">
@@ -86,13 +86,11 @@
     </div>
     <div class="content">
         <p>
-            The batch Web API need to be explicitly enabled and configured from the
-            <a href="/settings" use:link>Dashboard settings</a>.
+            批量Web API需要在<a href="/settings" use:link>仪表盘设置</a>中明确启用和配置。
         </p>
         <p>
-            Because this endpoint process the requests in a single transaction it could degrade the
-            performance of your application if not used with proper care and configuration (e.g. too large
-            allowed execution timeout, large body size limit, etc.).
+            由于此端点在单个事务中处理请求，如果配置不当（例如：过大的执行超时时间、过大的请求体大小限制等），
+            可能会降低应用程序的性能。
         </p>
     </div>
 </div>
@@ -132,82 +130,76 @@
     `}
 />
 
-<h6 class="m-b-xs">API details</h6>
+<h6 class="m-b-xs">API 详情</h6>
 <div class="api-route alert alert-success">
     <strong class="label label-primary">POST</strong>
     <div class="content">/api/batch</div>
 </div>
 
-<div class="section-title">Body Parameters</div>
+<div class="section-title">请求体参数</div>
 <p>
-    Body parameters could be sent as <em>application/json</em> or <em>multipart/form-data</em>.
+    请求体参数可以通过 <em>application/json</em> 或 <em>multipart/form-data</em> 格式发送。
     <br />
-    File upload is supported only via <em>multipart/form-data</em> (see below for more details).
+    文件上传仅支持通过 <em>multipart/form-data</em> 格式（详见下文）。
 </p>
 <table class="table-compact table-border m-t-xs m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th width="80%">Description</th>
+            <th>参数</th>
+            <th width="80%">描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td valign="top">
                 <div class="flex txt-nowrap">
-                    <span class="label label-success">Required</span>
+                    <span class="label label-success">Reuired</span>
                     <span>requests</span>
                 </div>
             </td>
             <td>
-                <span class="label">{`Array<Request>`}</span> - List of the requests to process.
+                <span class="label">{`Array<Request>`}</span> - 待处理的请求列表。
 
-                <p>The supported batch request actions are:</p>
+                <p>支持的批量请求操作包括：</p>
                 <ul>
-                    <li>record create - <code>POST /api/collections/{`{collection}`}/records</code></li>
+                    <li>记录创建 - <code>POST /api/collections/{`{collection}`}/records</code></li>
                     <li>
-                        record update -
+                        记录更新 -
                         <code>PATCH /api/collections/{`{collection}`}/records/{`{id}`}</code>
                     </li>
                     <li>
-                        record upsert - <code>PUT /api/collections/{`{collection}`}/records</code>
+                        记录插入 - <code>PUT /api/collections/{`{collection}`}/records</code>
                         <br />
                         <small class="txt-hint">
-                            (the body must have <code class="txt-sm">id</code> field)
+                            (请求体必须包含 <code class="txt-sm">id</code> 字段)
                         </small>
                     </li>
                     <li>
-                        record delete -
+                        记录删除 -
                         <code>DELETE /api/collections/{`{collection}`}/records/{`{id}`}</code>
                     </li>
                 </ul>
-                <p>Each batch Request element have the following properties:</p>
+                <p>每个批量请求元素包含以下属性：</p>
                 <ul>
-                    <li><code>url path</code> <em>(could include query parameters)</em></li>
+                    <li><code>url path</code> <em>(可以包含查询参数)</em></li>
                     <li><code>method</code> <em>(GET, POST, PUT, PATCH, DELETE)</em></li>
                     <li>
                         <code>headers</code>
                         <br />
                         <em>
-                            (custom per-request <code>Authorization</code> header is not supported at the moment,
-                            aka. all batch requests have the same auth state)
+                            (目前暂不支持自定义每个请求的 <code>Authorization</code> 头， 即所有批量请求共享相同的认证状态)
                         </em>
                     </li>
                     <li><code>body</code></li>
                 </ul>
                 <p>
-                    <strong>NB!</strong> When the batch request is send as
-                    <code>multipart/form-data</code>, the regular batch action fields are expected to be
-                    submitted as serailized json under the <code>@jsonPayload</code> field and file keys need
-                    to follow the pattern <code>requests.N.fileField</code> or
-                    <code>requests[N].fileField</code>
-                    <em>
-                        (this is usually handled transparently by the SDKs when their specific object notation
-                        is used)
-                    </em>.
+                    <strong>注意！</strong> 当批量请求以 <code>multipart/form-data</code> 格式发送时，
+                    常规的批量操作字段需要序列化为JSON并提交到 <code>@jsonPayload</code> 字段中，
+                    文件字段的键名需要遵循 <code>requests.N.fileField</code> 或
+                    <code>requests[N].fileField</code> 的模式
+                    <em> (当使用SDK的特定对象表示法时，这通常会被SDK自动处理) </em>。
                     <br />
-                    If you don't use the SDKs or prefer manually to construct the <code>FormData</code>
-                    body, then it could look something like:
+                    如果你不使用SDK或者想手动构造 <code>FormData</code> 请求体， 可以参考以下示例：
                     <CodeBlock
                         language="javascript"
                         content={`
@@ -228,10 +220,10 @@
                                 ]
                             }))
 
-                            // file for the first request
+                            // 第一个请求的文件
                             formData.append("requests.0.someFileField", new File(...))
 
-                            // file for the second request
+                            // 第二个请求的文件
                             formData.append("requests.1.someFileField", new File(...))
                         `}
                     />
@@ -241,7 +233,7 @@
     </tbody>
 </table>
 
-<div class="section-title">Responses</div>
+<div class="section-title">响应</div>
 <div class="tabs">
     <div class="tabs-header compact combined left">
         {#each responses as response (response.code)}

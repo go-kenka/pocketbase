@@ -54,14 +54,14 @@
     ];
 </script>
 
-<h3 class="m-b-sm">Auth with OAuth2 ({collection.name})</h3>
+<h3 class="m-b-sm">OAuth2认证 ({collection.name})</h3>
 <div class="content txt-lg m-b-sm">
-    <p>Authenticate with an OAuth2 provider and returns a new auth token and record data.</p>
+    <p>通过OAuth2提供商进行认证，并返回新的认证令牌和记录数据。</p>
     <p>
-        For more details please check the
+        更多详细信息请查看
         <a href={import.meta.env.PB_OAUTH2_EXAMPLE} target="_blank" rel="noopener noreferrer">
-            OAuth2 integration documentation
-        </a>.
+            OAuth2集成文档
+        </a>。
     </p>
 </div>
 
@@ -117,7 +117,7 @@
     `}
 />
 
-<h6 class="m-b-xs">API details</h6>
+<h6 class="m-b-xs">API详情</h6>
 <div class="alert alert-success">
     <strong class="label label-primary">POST</strong>
     <div class="content">
@@ -127,68 +127,68 @@
     </div>
 </div>
 
-<div class="section-title">Body Parameters</div>
+<div class="section-title">请求体参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="50%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="50%">描述</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
                 <div class="inline-flex">
-                    <span class="label label-success">Required</span>
+                    <span class="label label-success">必填</span>
                     <span>provider</span>
                 </div>
             </td>
             <td>
                 <span class="label">String</span>
             </td>
-            <td>The name of the OAuth2 client provider (eg. "google").</td>
+            <td>OAuth2客户端提供商的名称（例如："google"）。</td>
         </tr>
         <tr>
             <td>
                 <div class="inline-flex">
-                    <span class="label label-success">Required</span>
+                    <span class="label label-success">必填</span>
                     <span>code</span>
                 </div>
             </td>
             <td>
                 <span class="label">String</span>
             </td>
-            <td>The authorization code returned from the initial request.</td>
+            <td>初始请求返回的授权码。</td>
         </tr>
         <tr>
             <td>
                 <div class="inline-flex">
-                    <span class="label label-success">Required</span>
+                    <span class="label label-success">必填</span>
                     <span>codeVerifier</span>
                 </div>
             </td>
             <td>
                 <span class="label">String</span>
             </td>
-            <td>The code verifier sent with the initial request as part of the code_challenge.</td>
+            <td>作为code_challenge一部分的初始请求中发送的代码验证器。</td>
         </tr>
         <tr>
             <td>
                 <div class="inline-flex">
-                    <span class="label label-success">Required</span>
+                    <span class="label label-success">必填</span>
                     <span>redirectURL</span>
                 </div>
             </td>
             <td>
                 <span class="label">String</span>
             </td>
-            <td>The redirect url sent with the initial request.</td>
+            <td>初始请求中发送的重定向URL。</td>
         </tr>
         <tr>
             <td>
                 <div class="inline-flex">
-                    <span class="label label-warning">Optional</span>
+                    <span class="label label-warning">可选</span>
                     <span>createData</span>
                 </div>
             </td>
@@ -196,14 +196,14 @@
                 <span class="label">Object</span>
             </td>
             <td>
-                <p>Optional data that will be used when creating the auth record on OAuth2 sign-up.</p>
+                <p>在OAuth2注册时用于创建认证记录的可选数据。</p>
                 <p>
-                    The created auth record must comply with the same requirements and validations in the
-                    regular <strong>create</strong> action.
+                    创建的认证记录必须符合常规<strong>create</strong>操作中的相同要求和验证规则。
                     <br />
                     <em>
-                        The data can only be in <code>json</code>, aka. <code>multipart/form-data</code> and files
-                        upload currently are not supported during OAuth2 sign-ups.
+                        数据只能是<code>json</code>格式，即在OAuth2注册过程中目前不支持<code
+                            >multipart/form-data</code
+                        >和文件上传。
                     </em>
                 </p>
             </td>
@@ -211,13 +211,13 @@
     </tbody>
 </table>
 
-<div class="section-title">Query parameters</div>
+<div class="section-title">查询参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="60%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="60%">描述</th>
         </tr>
     </thead>
     <tbody>
@@ -227,20 +227,21 @@
                 <span class="label">String</span>
             </td>
             <td>
-                Auto expand record relations. Ex.:
+                自动展开记录关联。例如：
                 <CodeBlock content={`?expand=relField1,relField2.subRelField`} />
-                Supports up to 6-levels depth nested relations expansion. <br />
-                The expanded relations will be appended to the record under the
-                <code>expand</code> property (eg. <code>{`"expand": {"relField1": {...}, ...}`}</code>).
+                支持最多6层深度的嵌套关联展开。<br />
+                展开的关联将附加到记录的<code>expand</code>属性下 （例如：<code
+                    >{`"expand": {"relField1": {...}, ...}`}</code
+                >）。
                 <br />
-                Only the relations to which the request user has permissions to <strong>view</strong> will be expanded.
+                只有请求用户具有<strong>查看</strong>权限的关联才会被展开。
             </td>
         </tr>
         <FieldsQueryParam prefix="record." />
     </tbody>
 </table>
 
-<div class="section-title">Responses</div>
+<div class="section-title">响应</div>
 <div class="tabs">
     <div class="tabs-header compact combined left">
         {#each responses as response (response.code)}
