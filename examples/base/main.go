@@ -1,19 +1,24 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
+	"time"
 
 	"github.com/go-kenka/pocketbase"
 	"github.com/go-kenka/pocketbase/apis"
 	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/examples/base/cronutil"
 	"github.com/go-kenka/pocketbase/plugins/ghupdate"
 	"github.com/go-kenka/pocketbase/plugins/jsvm"
 	"github.com/go-kenka/pocketbase/plugins/migratecmd"
 	"github.com/go-kenka/pocketbase/tools/hook"
+	"github.com/mitchellh/mapstructure"
 )
 
 func main() {
@@ -103,6 +108,10 @@ func main() {
 	// GitHub selfupdate
 	ghupdate.MustRegister(app, app.RootCmd, ghupdate.Config{})
 
+	// 设置任务时区为上海
+	timezone, _ := time.LoadLocation("Asia/Shanghai")
+	app.Cron().SetTimezone(timezone)
+
 	// static route to serves files from the provided public dir
 	// (if publicDir exists and the route path is not already defined)
 	app.OnServe().Bind(&hook.Handler[*core.ServeEvent]{
@@ -114,6 +123,117 @@ func main() {
 			return e.Next()
 		},
 		Priority: 999, // execute as latest as possible to allow users to provide their own route
+	})
+
+	app.OnBootstrap().BindFunc(func(e *core.BootstrapEvent) error {
+		if err := e.Next(); err != nil {
+			return err
+		}
+		// 获取所有计划
+		records, err := app.FindAllRecords("plans")
+		if err != nil {
+			log.Println("find all records failed: ", err)
+			return err
+		}
+
+		// 遍历所有计划
+		for _, record := range records {
+			data := record.FieldsData()
+			var plan Plan
+			mapstructure.Decode(data, &plan)
+			log.Println("plan:", plan)
+
+			// 生成cron表达式
+			crons := plan.CronStr()
+			log.Println("cronStr:", crons)
+			// 添加任务
+			for i, cronStr := range crons {
+				// 添加任务
+				app.Cron().MustAdd(plan.ID+strconv.FormatInt(int64(i+1), 10), cronStr, func() {
+					plan.Notify(app)
+				})
+			}
+		}
+		return nil
+	})
+
+	app.OnRecordAfterCreateSuccess().BindFunc(func(e *core.RecordEvent) error {
+		col := e.Record.Collection()
+		if col.Name == "plans" {
+			data := e.Record.FieldsData()
+			var plan Plan
+			mapstructure.Decode(data, &plan)
+			log.Println("create plan:", plan)
+
+			// 生成cron表达式
+			crons := plan.CronStr()
+			log.Println("cronStr:", crons)
+
+			// 添加任务
+			for i, cronStr := range crons {
+				// 添加任务
+				app.Cron().MustAdd(plan.ID+strconv.FormatInt(int64(i+1), 10), cronStr, func() {
+					plan.Notify(app)
+				})
+			}
+			return nil
+		}
+
+		log.Println("Record created:", e.Record)
+		return nil
+	})
+
+	app.OnRecordAfterUpdateSuccess().BindFunc(func(e *core.RecordEvent) error {
+		col := e.Record.Collection()
+		if col.Name == "plans" {
+			data := e.Record.FieldsData()
+			var plan Plan
+			mapstructure.Decode(data, &plan)
+			log.Println("create plan:", plan)
+
+			// 生成cron表达式
+			crons := plan.CronStr()
+			log.Println("cronStr:", crons)
+
+			// 判断任务是否存在
+			jobs := app.Cron().Jobs()
+			for _, job := range jobs {
+				if strings.HasPrefix(job.Id(), plan.ID) {
+					// 删除任务
+					app.Cron().Remove(job.Id())
+					continue
+				}
+			}
+
+			for i, cronStr := range crons {
+				// 添加任务
+				app.Cron().MustAdd(plan.ID+strconv.FormatInt(int64(i+1), 10), cronStr, func() {
+					plan.Notify(app)
+				})
+			}
+
+			return nil
+		}
+
+		log.Println("Record created:", e.Record)
+		return nil
+	})
+
+	app.OnRecordAfterDeleteSuccess().BindFunc(func(e *core.RecordEvent) error {
+		col := e.Record.Collection()
+		if col.Name == "plans" {
+			// 判断任务是否存在
+			jobs := app.Cron().Jobs()
+			for _, job := range jobs {
+				if strings.HasPrefix(job.Id(), e.Record.Id) {
+					// 删除任务
+					app.Cron().Remove(job.Id())
+					continue
+				}
+			}
+			return nil
+		}
+		return nil
 	})
 
 	if err := app.Start(); err != nil {
@@ -129,4 +249,75 @@ func defaultPublicDir() string {
 	}
 
 	return filepath.Join(os.Args[0], "../pb_public")
+}
+
+type Plan struct {
+	CreatedBy  string   `mapstructure:"created_by"`
+	EndTime    string   `mapstructure:"end_time"`
+	ID         string   `mapstructure:"id"`
+	Interval   int      `mapstructure:"interval"`
+	Name       string   `mapstructure:"name"`
+	StartTime  string   `mapstructure:"start_time"`
+	TaskId     string   `mapstructure:"task_id"`
+	UseAlarm   bool     `mapstructure:"use_alarm"`
+	UseEmail   bool     `mapstructure:"use_email"`
+	UseWebhook bool     `mapstructure:"use_webhook"`
+	Weekday    []string `mapstructure:"weekday"`
+}
+
+func (p *Plan) Notify(app *pocketbase.PocketBase) error {
+	log.Println("job running:", p.ID)
+
+	// 发送邮件
+	if p.UseEmail {
+		log.Println("send email:", p.ID)
+	}
+
+	// 发送webhook
+	if p.UseWebhook {
+		log.Println("send webhook:", p.ID)
+	}
+
+	// 发送告警
+	if p.UseAlarm {
+		collection, err := app.FindCollectionByNameOrId("notifications")
+		if err != nil {
+			log.Println("notifications not found: ", err)
+			return err
+		}
+
+		record := core.NewRecord(collection)
+
+		record.Set("user_id", p.CreatedBy)
+		record.Set("message", fmt.Sprintf("plan %s is running", p.ID))
+
+		// field type specific modifiers can also be used
+		record.Set("extend", map[string]any{"plan": p.ID})
+		record.Set("hasRead", false)
+
+		// validate and persist
+		// (use SaveNoValidate to skip fields validation)
+		err = app.Save(record)
+		if err != nil {
+			log.Println("save record failed: ", err)
+			return err
+		}
+	}
+	return nil
+}
+
+// CronStr 生成cron表达式
+func (p *Plan) CronStr() []string {
+	// 通过weekday和interval以及start_time和end_time生成cron表达式
+	// 1. 生成weekday的格式是0-6
+	// 2. 生成interval的单位是分钟
+	// 3. 生成start_time和end_time的格式是00:00，24小时制，只支持小时级别的间隔
+	// 4. 生成cron表达式的格式是0 0 * * *
+
+	crons, err := cronutil.GenCron(p.StartTime, p.EndTime, p.Weekday, p.Interval)
+	if err != nil {
+		log.Println("gen cron failed: ", err)
+		return nil
+	}
+	return crons
 }
