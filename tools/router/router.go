@@ -9,7 +9,7 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/pocketbase/pocketbase/tools/hook"
+	"github.com/go-kenka/pocketbase/tools/hook"
 )
 
 type EventCleanupFunc func()

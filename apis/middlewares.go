@@ -11,11 +11,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/hook"
-	"github.com/pocketbase/pocketbase/tools/list"
-	"github.com/pocketbase/pocketbase/tools/router"
-	"github.com/pocketbase/pocketbase/tools/routine"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tools/hook"
+	"github.com/go-kenka/pocketbase/tools/list"
+	"github.com/go-kenka/pocketbase/tools/router"
+	"github.com/go-kenka/pocketbase/tools/routine"
 	"github.com/spf13/cast"
 )
 

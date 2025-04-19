@@ -5,9 +5,9 @@ import (
 	"database/sql/driver"
 	"slices"
 
+	"github.com/go-kenka/pocketbase/tools/list"
+	"github.com/go-kenka/pocketbase/tools/types"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/pocketbase/pocketbase/tools/list"
-	"github.com/pocketbase/pocketbase/tools/types"
 )
 
 func init() {

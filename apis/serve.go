@@ -13,11 +13,11 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/hook"
-	"github.com/pocketbase/pocketbase/tools/list"
-	"github.com/pocketbase/pocketbase/tools/routine"
-	"github.com/pocketbase/pocketbase/ui"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tools/hook"
+	"github.com/go-kenka/pocketbase/tools/list"
+	"github.com/go-kenka/pocketbase/tools/routine"
+	"github.com/go-kenka/pocketbase/ui"
 	"golang.org/x/crypto/acme"
 	"golang.org/x/crypto/acme/autocert"
 )

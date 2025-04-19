@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tests"
-	"github.com/pocketbase/pocketbase/tools/router"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tests"
+	"github.com/go-kenka/pocketbase/tools/router"
 )
 
 func TestBatchRequest(t *testing.T) {

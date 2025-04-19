@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/fatih/color"
+	"github.com/go-kenka/pocketbase/tools/osutils"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/tools/osutils"
 	"github.com/spf13/cast"
 )
 

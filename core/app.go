@@ -8,13 +8,13 @@ import (
 	"log/slog"
 	"time"
 
+	"github.com/go-kenka/pocketbase/tools/cron"
+	"github.com/go-kenka/pocketbase/tools/filesystem"
+	"github.com/go-kenka/pocketbase/tools/hook"
+	"github.com/go-kenka/pocketbase/tools/mailer"
+	"github.com/go-kenka/pocketbase/tools/store"
+	"github.com/go-kenka/pocketbase/tools/subscriptions"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/tools/cron"
-	"github.com/pocketbase/pocketbase/tools/filesystem"
-	"github.com/pocketbase/pocketbase/tools/hook"
-	"github.com/pocketbase/pocketbase/tools/mailer"
-	"github.com/pocketbase/pocketbase/tools/store"
-	"github.com/pocketbase/pocketbase/tools/subscriptions"
 )
 
 // App defines the main PocketBase app interface.

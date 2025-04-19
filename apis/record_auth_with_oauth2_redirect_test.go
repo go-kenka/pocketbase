@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tests"
-	"github.com/pocketbase/pocketbase/tools/subscriptions"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tests"
+	"github.com/go-kenka/pocketbase/tools/subscriptions"
 )
 
 func TestRecordAuthWithOAuth2Redirect(t *testing.T) {

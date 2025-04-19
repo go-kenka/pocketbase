@@ -1,8 +1,8 @@
 package apis
 
 import (
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/router"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tools/router"
 )
 
 // bindRecordAuthApi registers the auth record api endpoints and

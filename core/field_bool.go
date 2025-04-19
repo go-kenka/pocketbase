@@ -3,8 +3,8 @@ package core
 import (
 	"context"
 
+	"github.com/go-kenka/pocketbase/core/validators"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/pocketbase/pocketbase/core/validators"
 	"github.com/spf13/cast"
 )
 

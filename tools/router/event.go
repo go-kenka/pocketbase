@@ -12,10 +12,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/pocketbase/pocketbase/tools/filesystem"
-	"github.com/pocketbase/pocketbase/tools/hook"
-	"github.com/pocketbase/pocketbase/tools/picker"
-	"github.com/pocketbase/pocketbase/tools/store"
+	"github.com/go-kenka/pocketbase/tools/filesystem"
+	"github.com/go-kenka/pocketbase/tools/hook"
+	"github.com/go-kenka/pocketbase/tools/picker"
+	"github.com/go-kenka/pocketbase/tools/store"
 )
 
 var ErrUnsupportedContentType = NewBadRequestError("Unsupported Content-Type", nil)

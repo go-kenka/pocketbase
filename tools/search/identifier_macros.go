@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/go-kenka/pocketbase/tools/types"
 )
 
 // note: used primarily for the tests

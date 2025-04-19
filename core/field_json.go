@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/go-kenka/pocketbase/core/validators"
+	"github.com/go-kenka/pocketbase/tools/types"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/go-ozzo/ozzo-validation/v4/is"
-	"github.com/pocketbase/pocketbase/core/validators"
-	"github.com/pocketbase/pocketbase/tools/types"
 )
 
 func init() {

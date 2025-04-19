@@ -10,10 +10,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/forms"
-	"github.com/pocketbase/pocketbase/tests"
-	"github.com/pocketbase/pocketbase/tools/filesystem"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/forms"
+	"github.com/go-kenka/pocketbase/tests"
+	"github.com/go-kenka/pocketbase/tools/filesystem"
 )
 
 func TestRecordUpsertLoad(t *testing.T) {

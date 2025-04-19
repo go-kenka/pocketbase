@@ -15,9 +15,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/go-kenka/pocketbase/tools/security"
+	"github.com/go-kenka/pocketbase/tools/types"
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/pocketbase/pocketbase/tools/security"
-	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/spf13/cast"
 	"golang.org/x/oauth2"
 )

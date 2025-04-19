@@ -15,13 +15,13 @@ import (
 	"time"
 
 	"github.com/dop251/goja"
+	"github.com/go-kenka/pocketbase/apis"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tests"
+	"github.com/go-kenka/pocketbase/tools/filesystem"
+	"github.com/go-kenka/pocketbase/tools/mailer"
+	"github.com/go-kenka/pocketbase/tools/router"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/pocketbase/pocketbase/apis"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tests"
-	"github.com/pocketbase/pocketbase/tools/filesystem"
-	"github.com/pocketbase/pocketbase/tools/mailer"
-	"github.com/pocketbase/pocketbase/tools/router"
 	"github.com/spf13/cast"
 )
 

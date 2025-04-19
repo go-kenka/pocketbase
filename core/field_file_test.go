@@ -10,11 +10,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tests"
-	"github.com/pocketbase/pocketbase/tools/filesystem"
-	"github.com/pocketbase/pocketbase/tools/list"
-	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tests"
+	"github.com/go-kenka/pocketbase/tools/filesystem"
+	"github.com/go-kenka/pocketbase/tools/list"
+	"github.com/go-kenka/pocketbase/tools/types"
 )
 
 func TestFileFieldBaseMethods(t *testing.T) {

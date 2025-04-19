@@ -10,11 +10,11 @@ import (
 
 	_ "unsafe"
 
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tests"
+	"github.com/go-kenka/pocketbase/tools/logger"
+	"github.com/go-kenka/pocketbase/tools/mailer"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tests"
-	"github.com/pocketbase/pocketbase/tools/logger"
-	"github.com/pocketbase/pocketbase/tools/mailer"
 )
 
 func TestNewBaseApp(t *testing.T) {

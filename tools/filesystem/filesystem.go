@@ -20,8 +20,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/disintegration/imaging"
 	"github.com/gabriel-vasile/mimetype"
-	"github.com/pocketbase/pocketbase/tools/filesystem/internal/s3lite"
-	"github.com/pocketbase/pocketbase/tools/list"
+	"github.com/go-kenka/pocketbase/tools/filesystem/internal/s3lite"
+	"github.com/go-kenka/pocketbase/tools/list"
 	"gocloud.dev/blob"
 	"gocloud.dev/blob/fileblob"
 	"gocloud.dev/gcerrors"
@@ -42,8 +42,8 @@ type System struct {
 //
 // enforce WHEN_REQUIRED by default in case the user has updated AWS SDK dependency
 // https://github.com/aws/aws-sdk-go-v2/discussions/2960
-// https://github.com/pocketbase/pocketbase/discussions/6440
-// https://github.com/pocketbase/pocketbase/discussions/6313
+// https://github.com/go-kenka/pocketbase/discussions/6440
+// https://github.com/go-kenka/pocketbase/discussions/6313
 func init() {
 	reqEnv := os.Getenv("AWS_REQUEST_CHECKSUM_CALCULATION")
 	if reqEnv == "" {

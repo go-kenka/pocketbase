@@ -3,9 +3,9 @@ package apis
 import (
 	"net/http"
 
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tools/security"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/security"
 )
 
 func recordConfirmEmailChange(e *core.RequestEvent) error {

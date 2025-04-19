@@ -5,8 +5,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/pocketbase/pocketbase/tools/hook"
-	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/go-kenka/pocketbase/tools/hook"
+	"github.com/go-kenka/pocketbase/tools/types"
 )
 
 const (

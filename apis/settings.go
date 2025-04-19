@@ -3,10 +3,10 @@ package apis
 import (
 	"net/http"
 
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/forms"
+	"github.com/go-kenka/pocketbase/tools/router"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/forms"
-	"github.com/pocketbase/pocketbase/tools/router"
 )
 
 // bindSettingsApi registers the settings api endpoints.

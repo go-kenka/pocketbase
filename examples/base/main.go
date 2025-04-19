@@ -7,13 +7,13 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/pocketbase/pocketbase"
-	"github.com/pocketbase/pocketbase/apis"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/plugins/ghupdate"
-	"github.com/pocketbase/pocketbase/plugins/jsvm"
-	"github.com/pocketbase/pocketbase/plugins/migratecmd"
-	"github.com/pocketbase/pocketbase/tools/hook"
+	"github.com/go-kenka/pocketbase"
+	"github.com/go-kenka/pocketbase/apis"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/plugins/ghupdate"
+	"github.com/go-kenka/pocketbase/plugins/jsvm"
+	"github.com/go-kenka/pocketbase/plugins/migratecmd"
+	"github.com/go-kenka/pocketbase/tools/hook"
 )
 
 func main() {

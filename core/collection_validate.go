@@ -7,13 +7,13 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/go-kenka/pocketbase/core/validators"
+	"github.com/go-kenka/pocketbase/tools/dbutils"
+	"github.com/go-kenka/pocketbase/tools/list"
+	"github.com/go-kenka/pocketbase/tools/search"
+	"github.com/go-kenka/pocketbase/tools/types"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/core/validators"
-	"github.com/pocketbase/pocketbase/tools/dbutils"
-	"github.com/pocketbase/pocketbase/tools/list"
-	"github.com/pocketbase/pocketbase/tools/search"
-	"github.com/pocketbase/pocketbase/tools/types"
 )
 
 var collectionNameRegex = regexp.MustCompile(`^\w+$`)

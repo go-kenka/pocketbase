@@ -13,7 +13,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/pocketbase/pocketbase/tools/filesystem"
+	"github.com/go-kenka/pocketbase/tools/filesystem"
 )
 
 func TestFileSystemExists(t *testing.T) {

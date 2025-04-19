@@ -4,8 +4,8 @@ import (
 	"errors"
 	"time"
 
+	"github.com/go-kenka/pocketbase/tools/types"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/tools/types"
 )
 
 // FindAllMFAsByRecord returns all MFA models linked to the provided auth record.

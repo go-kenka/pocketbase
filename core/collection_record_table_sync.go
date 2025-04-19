@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/go-kenka/pocketbase/tools/dbutils"
+	"github.com/go-kenka/pocketbase/tools/security"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/tools/dbutils"
-	"github.com/pocketbase/pocketbase/tools/security"
 )
 
 // SyncRecordTableSchema compares the two provided collections

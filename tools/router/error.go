@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/go-kenka/pocketbase/tools/inflector"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/pocketbase/pocketbase/tools/inflector"
 )
 
 // SafeErrorItem defines a common error interface for a printable public safe error.

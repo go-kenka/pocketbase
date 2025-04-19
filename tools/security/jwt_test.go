@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/go-kenka/pocketbase/tools/security"
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/pocketbase/pocketbase/tools/security"
 )
 
 func TestParseUnverifiedJWT(t *testing.T) {

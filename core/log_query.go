@@ -3,8 +3,8 @@ package core
 import (
 	"time"
 
+	"github.com/go-kenka/pocketbase/tools/types"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/tools/types"
 )
 
 // LogQuery returns a new Log select query.

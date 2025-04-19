@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/go-kenka/pocketbase/tools/router"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/pocketbase/pocketbase/tools/router"
 )
 
 func TestNewApiErrorWithRawData(t *testing.T) {

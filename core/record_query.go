@@ -8,12 +8,12 @@ import (
 	"reflect"
 	"strings"
 
+	"github.com/go-kenka/pocketbase/tools/dbutils"
+	"github.com/go-kenka/pocketbase/tools/inflector"
+	"github.com/go-kenka/pocketbase/tools/list"
+	"github.com/go-kenka/pocketbase/tools/search"
+	"github.com/go-kenka/pocketbase/tools/security"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/tools/dbutils"
-	"github.com/pocketbase/pocketbase/tools/inflector"
-	"github.com/pocketbase/pocketbase/tools/list"
-	"github.com/pocketbase/pocketbase/tools/search"
-	"github.com/pocketbase/pocketbase/tools/security"
 )
 
 var recordProxyType = reflect.TypeOf((*RecordProxy)(nil)).Elem()

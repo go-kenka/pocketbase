@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/pocketbase/pocketbase/tools/hook"
-	"github.com/pocketbase/pocketbase/tools/router"
+	"github.com/go-kenka/pocketbase/tools/hook"
+	"github.com/go-kenka/pocketbase/tools/router"
 )
 
 const CollectionNameSuperusers = "_superusers"

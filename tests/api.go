@@ -13,9 +13,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pocketbase/pocketbase/apis"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/hook"
+	"github.com/go-kenka/pocketbase/apis"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tools/hook"
 )
 
 // ApiScenario defines a single api request test case/scenario.

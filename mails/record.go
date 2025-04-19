@@ -6,9 +6,9 @@ import (
 	"net/mail"
 	"slices"
 
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/mails/templates"
-	"github.com/pocketbase/pocketbase/tools/mailer"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/mails/templates"
+	"github.com/go-kenka/pocketbase/tools/mailer"
 )
 
 // SendRecordAuthAlert sends a new device login alert to the specified auth record.

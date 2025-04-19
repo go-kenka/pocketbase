@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/mails"
+	"github.com/go-kenka/pocketbase/tools/routine"
+	"github.com/go-kenka/pocketbase/tools/security"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/go-ozzo/ozzo-validation/v4/is"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/mails"
-	"github.com/pocketbase/pocketbase/tools/routine"
-	"github.com/pocketbase/pocketbase/tools/security"
 )
 
 func recordRequestOTP(e *core.RequestEvent) error {

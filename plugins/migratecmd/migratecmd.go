@@ -23,9 +23,9 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/inflector"
-	"github.com/pocketbase/pocketbase/tools/osutils"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tools/inflector"
+	"github.com/go-kenka/pocketbase/tools/osutils"
 	"github.com/spf13/cobra"
 )
 

@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/gabriel-vasile/mimetype"
+	"github.com/go-kenka/pocketbase/tools/filesystem"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/pocketbase/pocketbase/tools/filesystem"
 )
 
 // UploadedFileSize checks whether the validated [*filesystem.File]

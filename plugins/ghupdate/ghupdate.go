@@ -21,9 +21,9 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/archive"
-	"github.com/pocketbase/pocketbase/tools/osutils"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tools/archive"
+	"github.com/go-kenka/pocketbase/tools/osutils"
 	"github.com/spf13/cobra"
 )
 

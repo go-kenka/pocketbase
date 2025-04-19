@@ -5,10 +5,10 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/cron"
-	"github.com/pocketbase/pocketbase/tools/router"
-	"github.com/pocketbase/pocketbase/tools/routine"
+	"github.com/go-kenka/pocketbase/core"
+	"github.com/go-kenka/pocketbase/tools/cron"
+	"github.com/go-kenka/pocketbase/tools/router"
+	"github.com/go-kenka/pocketbase/tools/routine"
 )
 
 // bindCronApi registers the crons api endpoint.

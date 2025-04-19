@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/go-kenka/pocketbase/tools/list"
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/tools/list"
 	_ "modernc.org/sqlite"
 )
 
