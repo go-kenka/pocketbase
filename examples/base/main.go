@@ -125,37 +125,37 @@ func main() {
 		Priority: 999, // execute as latest as possible to allow users to provide their own route
 	})
 
-	app.OnBootstrap().BindFunc(func(e *core.BootstrapEvent) error {
-		if err := e.Next(); err != nil {
-			return err
-		}
-		// 获取所有计划
-		records, err := app.FindAllRecords("plans")
-		if err != nil {
-			log.Println("find all records failed: ", err)
-			return err
-		}
+	// app.OnBootstrap().BindFunc(func(e *core.BootstrapEvent) error {
+	// 	if err := e.Next(); err != nil {
+	// 		return err
+	// 	}
+	// 	// 获取所有计划
+	// 	records, err := app.FindAllRecords("plans")
+	// 	if err != nil {
+	// 		log.Println("find all records failed: ", err)
+	// 		return err
+	// 	}
 
-		// 遍历所有计划
-		for _, record := range records {
-			data := record.FieldsData()
-			var plan Plan
-			mapstructure.Decode(data, &plan)
-			log.Println("plan:", plan)
+	// 	// 遍历所有计划
+	// 	for _, record := range records {
+	// 		data := record.FieldsData()
+	// 		var plan Plan
+	// 		mapstructure.Decode(data, &plan)
+	// 		log.Println("plan:", plan)
 
-			// 生成cron表达式
-			crons := plan.CronStr()
-			log.Println("cronStr:", crons)
-			// 添加任务
-			for i, cronStr := range crons {
-				// 添加任务
-				app.Cron().MustAdd(plan.ID+strconv.FormatInt(int64(i+1), 10), cronStr, func() {
-					plan.Notify(app)
-				})
-			}
-		}
-		return nil
-	})
+	// 		// 生成cron表达式
+	// 		crons := plan.CronStr()
+	// 		log.Println("cronStr:", crons)
+	// 		// 添加任务
+	// 		for i, cronStr := range crons {
+	// 			// 添加任务
+	// 			app.Cron().MustAdd(plan.ID+strconv.FormatInt(int64(i+1), 10), cronStr, func() {
+	// 				plan.Notify(app)
+	// 			})
+	// 		}
+	// 	}
+	// 	return nil
+	// })
 
 	app.OnRecordAfterCreateSuccess().BindFunc(func(e *core.RecordEvent) error {
 		col := e.Record.Collection()
