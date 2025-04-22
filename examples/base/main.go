@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -17,6 +18,7 @@ import (
 	"github.com/go-kenka/pocketbase/plugins/jsvm"
 	"github.com/go-kenka/pocketbase/plugins/migratecmd"
 	"github.com/go-kenka/pocketbase/tools/hook"
+	"github.com/mitchellh/mapstructure"
 )
 
 func main() {
@@ -123,116 +125,116 @@ func main() {
 		Priority: 999, // execute as latest as possible to allow users to provide their own route
 	})
 
-	// app.OnBootstrap().BindFunc(func(e *core.BootstrapEvent) error {
-	// 	if err := e.Next(); err != nil {
-	// 		return err
-	// 	}
-	// 	// 获取所有计划
-	// 	records, err := app.FindAllRecords("plans")
-	// 	if err != nil {
-	// 		log.Println("find all records failed: ", err)
-	// 		return err
-	// 	}
+	app.OnBootstrap().BindFunc(func(e *core.BootstrapEvent) error {
+		if err := e.Next(); err != nil {
+			return err
+		}
+		// 获取所有计划
+		records, err := app.FindAllRecords("plans")
+		if err != nil {
+			log.Println("find all records failed: ", err)
+			return err
+		}
 
-	// 	// 遍历所有计划
-	// 	for _, record := range records {
-	// 		data := record.FieldsData()
-	// 		var plan Plan
-	// 		mapstructure.Decode(data, &plan)
-	// 		log.Println("plan:", plan)
+		// 遍历所有计划
+		for _, record := range records {
+			data := record.FieldsData()
+			var plan Plan
+			mapstructure.Decode(data, &plan)
+			log.Println("plan:", plan)
 
-	// 		// 生成cron表达式
-	// 		crons := plan.CronStr()
-	// 		log.Println("cronStr:", crons)
-	// 		// 添加任务
-	// 		for i, cronStr := range crons {
-	// 			// 添加任务
-	// 			app.Cron().MustAdd(plan.ID+strconv.FormatInt(int64(i+1), 10), cronStr, func() {
-	// 				plan.Notify(app)
-	// 			})
-	// 		}
-	// 	}
-	// 	return nil
-	// })
+			// 生成cron表达式
+			crons := plan.CronStr()
+			log.Println("cronStr:", crons)
+			// 添加任务
+			for i, cronStr := range crons {
+				// 添加任务
+				app.Cron().MustAdd(plan.ID+strconv.FormatInt(int64(i+1), 10), cronStr, func() {
+					plan.Notify(app)
+				})
+			}
+		}
+		return nil
+	})
 
-	// app.OnRecordAfterCreateSuccess().BindFunc(func(e *core.RecordEvent) error {
-	// 	col := e.Record.Collection()
-	// 	if col.Name == "plans" {
-	// 		data := e.Record.FieldsData()
-	// 		var plan Plan
-	// 		mapstructure.Decode(data, &plan)
-	// 		log.Println("create plan:", plan)
+	app.OnRecordAfterCreateSuccess().BindFunc(func(e *core.RecordEvent) error {
+		col := e.Record.Collection()
+		if col.Name == "plans" {
+			data := e.Record.FieldsData()
+			var plan Plan
+			mapstructure.Decode(data, &plan)
+			log.Println("create plan:", plan)
 
-	// 		// 生成cron表达式
-	// 		crons := plan.CronStr()
-	// 		log.Println("cronStr:", crons)
+			// 生成cron表达式
+			crons := plan.CronStr()
+			log.Println("cronStr:", crons)
 
-	// 		// 添加任务
-	// 		for i, cronStr := range crons {
-	// 			// 添加任务
-	// 			app.Cron().MustAdd(plan.ID+strconv.FormatInt(int64(i+1), 10), cronStr, func() {
-	// 				plan.Notify(app)
-	// 			})
-	// 		}
-	// 		return e.Next()
-	// 	}
+			// 添加任务
+			for i, cronStr := range crons {
+				// 添加任务
+				app.Cron().MustAdd(plan.ID+strconv.FormatInt(int64(i+1), 10), cronStr, func() {
+					plan.Notify(app)
+				})
+			}
+			return e.Next()
+		}
 
-	// 	log.Println("Record created:", e.Record)
-	// 	return e.Next()
-	// })
+		log.Println("Record created:", e.Record)
+		return e.Next()
+	})
 
-	// app.OnRecordAfterUpdateSuccess().BindFunc(func(e *core.RecordEvent) error {
-	// 	col := e.Record.Collection()
-	// 	if col.Name == "plans" {
-	// 		data := e.Record.FieldsData()
-	// 		var plan Plan
-	// 		mapstructure.Decode(data, &plan)
-	// 		log.Println("create plan:", plan)
+	app.OnRecordAfterUpdateSuccess().BindFunc(func(e *core.RecordEvent) error {
+		col := e.Record.Collection()
+		if col.Name == "plans" {
+			data := e.Record.FieldsData()
+			var plan Plan
+			mapstructure.Decode(data, &plan)
+			log.Println("create plan:", plan)
 
-	// 		// 生成cron表达式
-	// 		crons := plan.CronStr()
-	// 		log.Println("cronStr:", crons)
+			// 生成cron表达式
+			crons := plan.CronStr()
+			log.Println("cronStr:", crons)
 
-	// 		// 判断任务是否存在
-	// 		jobs := app.Cron().Jobs()
-	// 		for _, job := range jobs {
-	// 			if strings.HasPrefix(job.Id(), plan.ID) {
-	// 				// 删除任务
-	// 				app.Cron().Remove(job.Id())
-	// 				continue
-	// 			}
-	// 		}
+			// 判断任务是否存在
+			jobs := app.Cron().Jobs()
+			for _, job := range jobs {
+				if strings.HasPrefix(job.Id(), plan.ID) {
+					// 删除任务
+					app.Cron().Remove(job.Id())
+					continue
+				}
+			}
 
-	// 		for i, cronStr := range crons {
-	// 			// 添加任务
-	// 			app.Cron().MustAdd(plan.ID+strconv.FormatInt(int64(i+1), 10), cronStr, func() {
-	// 				plan.Notify(app)
-	// 			})
-	// 		}
+			for i, cronStr := range crons {
+				// 添加任务
+				app.Cron().MustAdd(plan.ID+strconv.FormatInt(int64(i+1), 10), cronStr, func() {
+					plan.Notify(app)
+				})
+			}
 
-	// 		return e.Next()
-	// 	}
+			return e.Next()
+		}
 
-	// 	log.Println("Record created:", e.Record)
-	// 	return e.Next()
-	// })
+		log.Println("Record created:", e.Record)
+		return e.Next()
+	})
 
-	// app.OnRecordAfterDeleteSuccess().BindFunc(func(e *core.RecordEvent) error {
-	// 	col := e.Record.Collection()
-	// 	if col.Name == "plans" {
-	// 		// 判断任务是否存在
-	// 		jobs := app.Cron().Jobs()
-	// 		for _, job := range jobs {
-	// 			if strings.HasPrefix(job.Id(), e.Record.Id) {
-	// 				// 删除任务
-	// 				app.Cron().Remove(job.Id())
-	// 				continue
-	// 			}
-	// 		}
-	// 		return e.Next()
-	// 	}
-	// 	return e.Next()
-	// })
+	app.OnRecordAfterDeleteSuccess().BindFunc(func(e *core.RecordEvent) error {
+		col := e.Record.Collection()
+		if col.Name == "plans" {
+			// 判断任务是否存在
+			jobs := app.Cron().Jobs()
+			for _, job := range jobs {
+				if strings.HasPrefix(job.Id(), e.Record.Id) {
+					// 删除任务
+					app.Cron().Remove(job.Id())
+					continue
+				}
+			}
+			return e.Next()
+		}
+		return e.Next()
+	})
 
 	if err := app.Start(); err != nil {
 		log.Fatal(err)
