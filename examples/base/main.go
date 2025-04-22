@@ -176,11 +176,11 @@ func main() {
 					plan.Notify(app)
 				})
 			}
-			return nil
+			return e.Next()
 		}
 
 		log.Println("Record created:", e.Record)
-		return nil
+		return e.Next()
 	})
 
 	app.OnRecordAfterUpdateSuccess().BindFunc(func(e *core.RecordEvent) error {
@@ -212,11 +212,11 @@ func main() {
 				})
 			}
 
-			return nil
+			return e.Next()
 		}
 
 		log.Println("Record created:", e.Record)
-		return nil
+		return e.Next()
 	})
 
 	app.OnRecordAfterDeleteSuccess().BindFunc(func(e *core.RecordEvent) error {
@@ -231,9 +231,9 @@ func main() {
 					continue
 				}
 			}
-			return nil
+			return e.Next()
 		}
-		return nil
+		return e.Next()
 	})
 
 	if err := app.Start(); err != nil {
